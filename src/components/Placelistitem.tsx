@@ -19,7 +19,7 @@ export default function Placelistitem({ place }) {
         "?maxwidth=400" +
         "&photo_reference=" +
         place?.photos[0]?.photo_reference +
-        "&key=AIzaSyAlIDUiTW6M9p6qb7mHsMCvqk0_OMO3MV0",
+        "&key=<api key>",
       }}
       style={{ width: 110, height: 110, borderRadius: 15 }}
     />:
