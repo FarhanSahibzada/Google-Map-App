@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, StyleSheet, Image } from 'react-native'
+import { View,  Dimensions, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { Searchbar } from 'react-native-paper'
 import locationimage from "@/assets/location.png"

@@ -3,11 +3,14 @@ import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as Paperprovider } from 'react-native-paper';
+import { Provider } from 'react-redux';
+import  Store  from '@/Store/Store';
+import { useFonts } from 'expo-font';
 
-export const Rootnavigation = ()=>{
+export const Rootnavigation = () => {
   return (
     <Stack>
-      <Stack.Screen  name='(tabs)' options={{headerShown : false}}/>
+      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
     </Stack>
   )
 }
@@ -16,16 +19,23 @@ export const Rootnavigation = ()=>{
 
 
 export default function App() {
+  const [loaded, error] = useFonts({
+    'railway': require('@/assets/fonts/Raleway-Regular.ttf'),
+    'railway-bold': require('@/assets/fonts/Raleway-SemiBold.ttf'),
+  });
   return (
     <SafeAreaProvider>
-      <GestureHandlerRootView style={{flex : 1}}>
-        <Paperprovider>
-        <Rootnavigation/>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Provider store={Store}>
+          <Paperprovider>
 
-        <StatusBar  style='auto'/>
-        </Paperprovider>
+            <Rootnavigation />
+
+            <StatusBar style='auto' />
+          </Paperprovider>
+        </Provider>
       </GestureHandlerRootView>
-    </SafeAreaProvider>
+    </SafeAreaProvider >
   );
 }
 
