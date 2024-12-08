@@ -22,12 +22,7 @@
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.Farhansahibzada.Google-Maps",
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyCMM6u_rC1tk7PILJZsunae2o5lb_VE4kM"
-        }
-      }
+      "package": "com.Farhansahibzada.Google-Maps"  
     },
     "web": {
       "favicon": "./assets/favicon.png"
