@@ -1,11 +1,12 @@
 import { View, ActivityIndicator, Dimensions, TouchableOpacity, StyleSheet, Image, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
+import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from 'react-native-maps'
 import * as Location from 'expo-location'
 import locationimage from "@/assets/location.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { Setlocation } from '@/Store/locationSlice'
 import { RootState } from '@/Store/Store'
+import PlaceMarker from './PlaceMarker'
 
 const { width } = Dimensions.get('screen')
 const { height } = Dimensions.get('screen')
@@ -15,8 +16,11 @@ type Region = {
   longitude: number;
   latitudeDelta: number;
   longitudeDelta: number;
-};
-export default function Googlemapview() {
+} ;
+
+type placelistprops = any ;
+
+export default function Googlemapview({ placelist, routes }: { placelist: any; routes?: any }) {
   const [mapregion, setmapregipon] = useState<Region | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const dispatch = useDispatch()
@@ -66,6 +70,7 @@ export default function Googlemapview() {
   }
 
 
+
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
@@ -94,10 +99,18 @@ export default function Googlemapview() {
             showsUserLocation={true}
             region={mapregion ?? undefined}
           >
-            <Marker 
+            {/* <Marker 
             title='you'
             coordinate={mapregion || { latitude: 24.8607, longitude: 67.0011 }}
-            />
+
+            /> */}
+
+            {placelist.map((items : any,index : number)=> index <= 6 &&(
+              <PlaceMarker item={items} key={index} />
+          ))}
+          {routes && (
+              <Polyline coordinates={routes} strokeWidth={4} strokeColor="blue" />
+            )}
           </MapView>
           <TouchableOpacity
             style={styles.locateButton}

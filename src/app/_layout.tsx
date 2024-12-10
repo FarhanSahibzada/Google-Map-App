@@ -8,9 +8,18 @@ import  Store  from '@/Store/Store';
 import { useFonts } from 'expo-font';
 
 export const Rootnavigation = () => {
+
   return (
     <Stack>
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+      <Stack.Screen name='(Modal)/ShowBussiness' options={{
+					presentation: 'modal',
+					headerStyle: {
+						backgroundColor: 'white',
+					},
+          gestureEnabled: true  ,
+          headerShown : false
+				}} />
     </Stack>
   )
 }

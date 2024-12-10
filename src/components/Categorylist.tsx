@@ -47,6 +47,7 @@ export default function CategoryList({ setSelectedCategory }: selectcateprops) {
                 data={categoryList}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
+                scrollEnabled={false}
                 style={{ marginTop: 3 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => setSelectedCategory(item)}>
