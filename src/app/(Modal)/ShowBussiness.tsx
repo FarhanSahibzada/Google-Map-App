@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import ShowbussinessDetail from '@/components/ShowbussinessDetail';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/Store/Store';
+import { OPEN_ROUTES_API_KEY } from '@env'
 
 export default function ShowBussiness() {
   const { item } = useLocalSearchParams<{ item: string }>();
@@ -24,7 +25,7 @@ export default function ShowBussiness() {
 
   useEffect(() => {
     const fetchapiroutes = async () => {
-      if(!lat && !lng ){
+      if (!lat && !lng) {
         Alert.alert(
           "Error",
           "There is a connection please try again",
@@ -36,9 +37,9 @@ export default function ShowBussiness() {
             { text: "OK", onPress: () => router.back() }
           ]
         );
+        return
       }
-      const API_KEY = '5b3ce3597851110001cf624829ada706d5564b5ca24d0a7a823738fd';
-      const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${origin.longitude},${origin.latitude}&end=${lng},${lat}`; // Increase radius
+      const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${OPEN_ROUTES_API_KEY}&start=${origin.longitude},${origin.latitude}&end=${lng},${lat}`; // Increase radius
 
       try {
         const response = await fetch(url);
@@ -48,16 +49,22 @@ export default function ShowBussiness() {
             latitude: coord[1],
             longitude: coord[0],
           }));
-          setCoordinates(route);
+          if (route.length) {
+            setCoordinates(route); // Only update coordinates if route exists
+          } else {
+            Alert.alert("Error", "No route found for the provided coordinates.");
+          }
+          
         }
       } catch (error) {
         console.error("Error fetching directions:", error);
       }
     }
     fetchapiroutes()
-  }, [])
+  }, [lat , lng])
 
-
+  
+  
 
   const onDirectionClick = () => {
     const url = Platform.select({
@@ -80,7 +87,9 @@ export default function ShowBussiness() {
         place={parsedItem}
         onDirectionClick={() => onDirectionClick()}
       />
-      <Googlemapview placelist={[parsedItem]} routes={coordinates} />
+      
+        <Googlemapview placelist={[parsedItem]} routes={coordinates.length > 0 ? coordinates : []} />
+  
       <TouchableOpacity
         style={{
           backgroundColor: Colorss.PRIMARY,

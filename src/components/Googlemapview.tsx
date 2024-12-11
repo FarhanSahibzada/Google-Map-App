@@ -16,9 +16,9 @@ type Region = {
   longitude: number;
   latitudeDelta: number;
   longitudeDelta: number;
-} ;
+};
 
-type placelistprops = any ;
+type placelistprops = any;
 
 export default function Googlemapview({ placelist, routes }: { placelist: any; routes?: any }) {
   const [mapregion, setmapregipon] = useState<Region | null>(null)
@@ -30,26 +30,35 @@ export default function Googlemapview({ placelist, routes }: { placelist: any; r
       const isLocationEnabled = await Location.hasServicesEnabledAsync();
       if (!isLocationEnabled) {
         setLoading(false)
-      }
-
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status != 'granted') {
-        console.log('Permission to access location was denied');
         return
       }
 
+      try {
 
-      let currentLocation = await Location.getCurrentPositionAsync({});
-      if (currentLocation) {
-        const regionn: Region = {
-          latitude: currentLocation.coords.latitude,
-          longitude: currentLocation.coords.longitude,
-          latitudeDelta: 0.0542,
-          longitudeDelta: 0.0421,
-        };
-        setmapregipon(regionn)
-        setLoading(false)
-        dispatch(Setlocation(regionn))
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status != 'granted') {
+          console.log('Permission to access location was denied');
+          return
+        }
+
+
+        let currentLocation = await Location.getCurrentPositionAsync({});
+        if (currentLocation) {
+          const regionn: Region = {
+            latitude: currentLocation.coords.latitude,
+            longitude: currentLocation.coords.longitude,
+            latitudeDelta: 0.0542,
+            longitudeDelta: 0.0421,
+          };
+          setmapregipon(regionn)
+          setLoading(false)
+          dispatch(Setlocation(regionn))
+        }
+
+      } catch (error) {
+        throw new Error("cannot get location");
+        console.log(error);
+
       }
     })();
   }, []);
@@ -63,69 +72,63 @@ export default function Googlemapview({ placelist, routes }: { placelist: any; r
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       };
+  
       setmapregipon(regionn);
       dispatch(Setlocation(regionn));
     }
 
   }
 
-
-
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    )
-  }
-  else {
-
-    return (
-      <View style={{ marginTop: 10, }}>
-        <Text style={{
-          fontSize: 20,
-          marginBottom: 10, fontWeight: "600", fontFamily : 'railway-bold'
-        }}>
-          Top Near By Places
-        </Text>
-        <View style={{ borderRadius: 20, overflow: 'hidden' }}>
+  return (
+    <View style={{ marginTop: 10 }}>
+      <Text style={{
+        fontSize: 20,
+        marginBottom: 10,
+        fontWeight: "600",
+        fontFamily: 'railway-bold'
+      }}>
+        Top Near By Places
+      </Text>
+      <View style={{ borderRadius: 20, overflow: 'hidden' }}>
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
           <MapView
             style={{
               width: width * 0.9,
               height: height * 0.28,
-
             }}
             provider={PROVIDER_GOOGLE}
             showsUserLocation={true}
-            region={mapregion ?? undefined}
+            region={mapregion || {
+              latitude: 24.8607,
+              longitude: 67.0011,
+              latitudeDelta: 0.0542,
+              longitudeDelta: 0.0421
+            }}
           >
-            {/* <Marker 
-            title='you'
-            coordinate={mapregion || { latitude: 24.8607, longitude: 67.0011 }}
-
-            /> */}
-
-            {placelist.map((items : any,index : number)=> index <= 6 &&(
+            {placelist.map((items: any, index: number) => index <= 6 && (
               <PlaceMarker item={items} key={index} />
-          ))}
-          {routes && (
+            ))}
+            {routes && (
               <Polyline coordinates={routes} strokeWidth={4} strokeColor="blue" />
             )}
           </MapView>
-          <TouchableOpacity
-            style={styles.locateButton}
-            onPress={requestLocation}
-          >
-            <Image
-              source={locationimage}
-              style={styles.locateButtonText} />
+        )}
 
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.locateButton}
+          onPress={requestLocation}
+        >
+          <Image
+            source={locationimage}
+            style={styles.locateButtonText} />
+        </TouchableOpacity>
       </View>
-    )
-  }
+    </View>
+  )
 }
+
 
 
 const styles = StyleSheet.create({

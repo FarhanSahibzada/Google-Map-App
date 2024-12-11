@@ -3,18 +3,23 @@ import React from 'react'
 import { Searchbar } from 'react-native-paper'
 import locationimage from "@/assets/location.png"
 import { defaultstyles } from '@/Styles'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/Store/Store'
 
 type AndroidSearch = {
     placeholder: string,
     searchText: string,
     setSearchText: (text: string) => void
+    result : ()=> void
 }
 
 const { width } = Dimensions.get('window')
-export const Header = ({ placeholder, searchText, setSearchText }: AndroidSearch) => {
+export const Header = ({ placeholder, searchText, setSearchText  , result}: AndroidSearch) => {
     const handleSearch = (text: string) => {
         setSearchText(text)
     }
+    
+    
 
     return (
         <View style={[defaultstyles.rowcontainer, { marginTop: 30, paddingHorizontal: 10 }]}>
@@ -31,6 +36,7 @@ export const Header = ({ placeholder, searchText, setSearchText }: AndroidSearch
                 rippleColor='#181C14'
                 placeholderTextColor="#181C14"
                 inputStyle={styles.Searchbar}
+                onIconPress={result}
             />
         </View>
     )

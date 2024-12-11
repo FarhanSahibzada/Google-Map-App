@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Header } from '@/components/Header'
 import Googlemapview from '@/components/Googlemapview'
@@ -24,10 +24,32 @@ export default function Home() {
         )
     }
   }
+  const handleiconclick = ()=>{
+    if (locationdata?.latitude && locationdata.longitude) {
+      GoogleNearbyApi.nearByPlace(locationdata.latitude, locationdata.longitude, search)
+        .then((res) =>
+           setPlace(res.elements)  
+        )
+    }else{
+      Alert.alert(
+        "Alert",
+          "Please Find your Location",
+          [
+            {
+              text: "Cancel",
+              style: "cancel", // Button style
+            },
+            { text: "OK" }
+          ]
+      )
+    }
+  }
+
+
 
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center', paddingBottom : 90 , }}>
-      <Header placeholder='Search location!' searchText={search} setSearchText={setSearch} />
+      <Header placeholder='Only search near by places!' searchText={search} setSearchText={setSearch} result={handleiconclick} />
       <ScrollView 
       contentInsetAdjustmentBehavior='automatic'
       showsVerticalScrollIndicator={false}

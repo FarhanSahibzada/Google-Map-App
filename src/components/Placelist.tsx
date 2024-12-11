@@ -25,6 +25,11 @@ export default function Placelist({ placelistprops }: placelistpropss) {
             style={{paddingBottom : 20}}
                 scrollEnabled={false}
                 showsVerticalScrollIndicator={false}
+                ListEmptyComponent={
+                    <View style={{display : 'flex' , justifyContent : "center" , alignItems : "center" , paddingTop : 50}}>
+                        <Text style={{flex : 1 , fontWeight : "600" , color : "blue" , fontSize : 22  }}>No location found</Text>
+                    </View>
+                }
                 data={placelistprops}
                 renderItem={({ item, index }) => (
                     <TouchableOpacity  onPress={()=> handleonpress(item)}> 

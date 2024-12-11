@@ -2,6 +2,7 @@
   "expo": {
     "name": "Google-Maps",
     "slug": "Google-Maps",
+    "entryPoint": "expo-router/entry",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +23,7 @@
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.Farhansahibzada.Google-Maps"  
+      "package": "com.Farhansahibzada.Google-Maps"
     },
     "web": {
       "favicon": "./assets/favicon.png"

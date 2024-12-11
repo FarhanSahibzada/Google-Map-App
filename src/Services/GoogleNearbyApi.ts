@@ -6,6 +6,7 @@ const BASE_URL = "https://overpass-api.de/api/interpreter";
 
 
 const nearByPlace = async (lat: number, lng: number, type: string) => {
+   type = type.trim().toLocaleLowerCase()
   const query = `
     [out:json];
     (
