@@ -41,6 +41,9 @@
     "experiments": {
       "typedRoutes": true,
       "tsConfigPaths": true
+    },
+    "extra": {
+      "OPEN_ROUTES_API_KEY": "<>YOUR API KEY"
     }
   }
 }

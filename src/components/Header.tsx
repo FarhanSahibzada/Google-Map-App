@@ -37,6 +37,8 @@ export const Header = ({ placeholder, searchText, setSearchText  , result}: Andr
                 placeholderTextColor="#181C14"
                 inputStyle={styles.Searchbar}
                 onIconPress={result}
+                onSubmitEditing={result}
+                returnKeyType='search'
             />
         </View>
     )

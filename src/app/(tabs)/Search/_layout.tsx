@@ -6,7 +6,7 @@ export default function _layout() {
   return (
     <View style={defaultstyles.container} >
         <Stack>
-            <Stack.Screen name="index"  options={{headerTitle : "Search"}}/>
+            <Stack.Screen name="index"  options={{headerShown : false}}/>
         </Stack>
     </View>
   )

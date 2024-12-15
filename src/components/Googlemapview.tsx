@@ -11,7 +11,7 @@ import PlaceMarker from './PlaceMarker'
 const { width } = Dimensions.get('screen')
 const { height } = Dimensions.get('screen')
 
-type Region = {
+export type Region = {
   latitude: number;
   longitude: number;
   latitudeDelta: number;
@@ -128,6 +128,7 @@ export default function Googlemapview({ placelist, routes }: { placelist: any; r
     </View>
   )
 }
+
 
 
 

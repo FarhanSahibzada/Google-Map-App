@@ -10,7 +10,7 @@ import { useFonts } from 'expo-font';
 export const Rootnavigation = () => {
 
   return (
-    <Stack>
+    <Stack>    
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
       <Stack.Screen name='(Modal)/ShowBussiness' options={{
 					presentation: 'modal',

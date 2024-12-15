@@ -26,11 +26,11 @@ export default function TabNavigationt() {
             >
                 <Tabs.Screen name="(Home)" options={{ title: 'Home', tabBarIcon: ({ color }) => <Entypo name="home" size={20} color={color} /> }} />
 
-                <Tabs.Screen name="Favourite" options={{ title: 'Favourite', tabBarIcon: ({ color }) => <FontAwesome name="heart" size={20} color={color} /> }} />
+                <Tabs.Screen name="Search" options={{ title: 'Explore', tabBarIcon: ({ color }) => <Ionicons name="search" size={20} color={color} /> }} />
 
-                <Tabs.Screen name="Search" options={{ title: 'Search', tabBarIcon: ({ color }) => <Ionicons name="search" size={20} color={color} /> }} />
+                {/* <Tabs.Screen name="Favourite" options={{ title: 'Favourite', tabBarIcon: ({ color }) => <FontAwesome name="heart" size={20} color={color} /> }} /> */} 
 
-                <Tabs.Screen name="Profile" options={{ title: 'Profile', tabBarIcon: ({ color }) => <FontAwesome6 name="user" size={20} color={color} /> }} />
+                <Tabs.Screen name="Profile" options={{ title: 'Profile', tabBarIcon: ({ color }) => <FontAwesome6 name="user" size={20} color={color} /> }} /> 
 
             </Tabs>
         </>

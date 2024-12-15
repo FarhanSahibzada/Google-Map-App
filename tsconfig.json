@@ -19,7 +19,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/assets/*": ["./assets/*"],
-      "@env": ["./expo-env.d.ts"]
+      // "@env": ["./expo-env.d.ts"]
     }
   },
   "include": [

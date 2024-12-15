@@ -7,7 +7,8 @@ import { Ionicons } from '@expo/vector-icons'
 import ShowbussinessDetail from '@/components/ShowbussinessDetail';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/Store/Store';
-import { OPEN_ROUTES_API_KEY } from '@env'
+import  Constants  from 'expo-constants';
+// import { OPEN_ROUTES_API_KEY } from '@env'
 
 export default function ShowBussiness() {
   const { item } = useLocalSearchParams<{ item: string }>();
@@ -18,6 +19,7 @@ export default function ShowBussiness() {
   const [coordinates, setCoordinates] = useState([]);
   const router = useRouter()
   const myLocation = useSelector((state: RootState) => state.Location)
+  const API_KEY = Constants.expoConfig?.extra?.OPEN_ROUTES_API_KEY.trim();
   const origin = {
     latitude: myLocation?.latitude,
     longitude: myLocation?.longitude
@@ -39,7 +41,8 @@ export default function ShowBussiness() {
         );
         return
       }
-      const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${OPEN_ROUTES_API_KEY}&start=${origin.longitude},${origin.latitude}&end=${lng},${lat}`; // Increase radius
+
+      const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${origin.longitude},${origin.latitude}&end=${lng},${lat}`; // Increase radius
 
       try {
         const response = await fetch(url);
@@ -61,7 +64,7 @@ export default function ShowBussiness() {
       }
     }
     fetchapiroutes()
-  }, [lat , lng])
+  }, [lat , lng , API_KEY])
 
   
   
