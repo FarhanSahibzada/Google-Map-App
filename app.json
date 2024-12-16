@@ -22,7 +22,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "./google-services.json",
       "package": "com.Farhansahibzada.Google-Maps"
     },
     "web": {
@@ -43,7 +42,7 @@
       "tsConfigPaths": true
     },
     "extra": {
-      "OPEN_ROUTES_API_KEY": "<>YOUR API KEY"
+      "<your API_KEYS>"
     }
   }
 }

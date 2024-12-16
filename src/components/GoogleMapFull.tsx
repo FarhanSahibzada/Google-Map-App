@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Region } from './Googlemapview'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/Store/Store'
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
+import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from 'react-native-maps'
 import PlaceMarker from './PlaceMarker'
 import * as Location from 'expo-location'
 import { Setlocation } from '@/Store/locationSlice'
 import locationimage from "@/assets/location.png"
 
-export default function GoogleMapFull({ placeList }: any) {
+export default function GoogleMapFull({ placeList, route }: any) {
   const [mapRegion, setMapRegion] = useState<Region | null>(null)
   const dispatch = useDispatch()
   const [text, setText] = useState(true)
@@ -73,10 +73,9 @@ export default function GoogleMapFull({ placeList }: any) {
       const letters = placeList[0].display_name;
       const wordstrim = letters.trim();
       const wordsplit = wordstrim.split(' ')
-      const firstword = wordsplit[0] + (wordsplit[1] || ''); 
+      const firstword = wordsplit[0] + (wordsplit[1] || '');
       const endword = wordsplit[wordsplit.length - 1];
       setMain(`${firstword} , ${endword}`)
-      console.log(placeList)
     } else {
       setText(true)
     }
@@ -119,6 +118,9 @@ export default function GoogleMapFull({ placeList }: any) {
             />
           )}
 
+          {route && (
+            <Polyline coordinates={route} strokeWidth={4} strokeColor="blue" />
+          )}
 
         </MapView> : null}
       <TouchableOpacity

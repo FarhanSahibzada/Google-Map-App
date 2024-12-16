@@ -42,8 +42,7 @@ export default function ShowBussiness() {
         return
       }
 
-      const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${origin.longitude},${origin.latitude}&end=${lng},${lat}`; // Increase radius
-
+      const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${origin.longitude},${origin.latitude}&end=${lng},${lat}`; 
       try {
         const response = await fetch(url);
         const data = await response.json();

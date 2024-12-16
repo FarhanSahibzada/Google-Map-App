@@ -11,6 +11,7 @@ export const Rootnavigation = () => {
 
   return (
     <Stack>    
+      <Stack.Screen name='(authScreen)' options={{ headerShown: false }} />
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
       <Stack.Screen name='(Modal)/ShowBussiness' options={{
 					presentation: 'modal',

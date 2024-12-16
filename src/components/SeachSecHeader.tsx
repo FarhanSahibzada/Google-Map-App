@@ -42,7 +42,7 @@ export default function SearchSecHeader({ setSearchText, searchText , result }: 
                 }}
             >
                 <Searchbar
-                    placeholder="Search!"
+                    placeholder="Search Any Place!"
                     style={styles.input}
                     value={searchText}
                     onChangeText={handleSearchText}

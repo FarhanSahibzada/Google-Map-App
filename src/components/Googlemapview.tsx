@@ -5,7 +5,6 @@ import * as Location from 'expo-location'
 import locationimage from "@/assets/location.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { Setlocation } from '@/Store/locationSlice'
-import { RootState } from '@/Store/Store'
 import PlaceMarker from './PlaceMarker'
 
 const { width } = Dimensions.get('screen')
