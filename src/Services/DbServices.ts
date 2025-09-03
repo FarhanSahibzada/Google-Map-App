@@ -12,7 +12,7 @@ export class dbServices {
             const id = uid;
             const docRef = doc(this.DB, collectionName, id)
             const respnse = await setDoc(docRef, data)
-            console.log("data is successfully add")
+          //  console.log("data is successfully add")
             return respnse
         } catch (error) {
             console.log("can't add the docment", error)

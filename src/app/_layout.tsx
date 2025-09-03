@@ -26,13 +26,12 @@ export const Rootnavigation = () => {
 }
 
 
-
-
 export default function App() {
   const [loaded, error] = useFonts({
     'railway': require('@/assets/fonts/Raleway-Regular.ttf'),
     'railway-bold': require('@/assets/fonts/Raleway-SemiBold.ttf'),
   });
+
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
